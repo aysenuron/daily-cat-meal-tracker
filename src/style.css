@@ -1,0 +1,119 @@
+body {
+  font-family: Poppins;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+#logo-text {
+  font-weight: 600;
+  font-size: 20px;
+  padding-top: 6px;
+}
+
+#logo-img {
+  width: 64px;
+}
+
+#logo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.input-section {
+  margin: 64px 0;
+}
+
+.meal-type-container {
+  display: grid;
+  grid-column: 2;
+  grid-row: 2;
+  column-gap: 20px;
+  row-gap: 20px;
+}
+
+.food-input-container {
+  cursor: pointer;
+  padding: 16px 8px;
+  border-style: solid;
+  border-radius: 12px;
+  border-width: 1px;
+  border-color: #d8d8d8;
+  font-size: 20pxpx;
+  grid-row-start: 1;
+  grid-end-start: 1;
+}
+
+.food-input-container.dry {
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+
+.food-input-container.wet {
+  grid-column-start: 2;
+  grid-column-end: 2;
+}
+
+.portions-selection {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 2;
+  grid-end-start: 2;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.portions-dropdown {
+  padding: 8px 16px 8px 8px;
+  border-radius: 8px;
+}
+
+.dropdown-label {
+  font-size: 16px;
+}
+
+.wet-food-selection {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-end-start: 2;
+}
+
+#log-meal {
+  cursor: pointer;
+  font-family: Poppins;
+  font-size: 16px;
+  border: none;
+  width: 100%;
+  max-width: 500px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  background-color: black;
+  color: white;
+  margin: 0 auto;
+}
+
+.log-button-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logged-meal {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.timestamp {
+  font-weight: 400;
+}
+
+.hidden {
+  display: none;
+}
