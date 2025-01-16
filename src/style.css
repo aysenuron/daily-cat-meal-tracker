@@ -107,6 +107,9 @@ body {
 
 #logged-meals-list {
   list-style: none;
+  list-style-position: outside;
+  padding: 0;
+  margin: 0;
 }
 
 .logged-meal {
@@ -119,11 +122,11 @@ body {
 }
 
 #total-meals-list {
-  margin-top: 40px;
   list-style-type: circle;
   display: flex;
   flex-flow: column;
   gap: 20px;
+  margin-top: 40px;
 }
 
 #total-meals-list span {
@@ -162,7 +165,7 @@ body {
 
 #clear-data-button {
   background-color: white;
-  color: black;
+  color: red;
   cursor: pointer;
   font-family: Poppins;
   font-size: 12px;
