@@ -105,6 +105,10 @@ body {
   justify-content: center;
 }
 
+#logged-meals-list {
+  list-style: none;
+}
+
 .logged-meal {
   font-weight: 600;
   margin-bottom: 16px;
@@ -112,6 +116,25 @@ body {
 
 .timestamp {
   font-weight: 400;
+}
+
+#total-meals-list {
+  margin-top: 40px;
+  list-style-type: circle;
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+#total-meals-list span {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.meal-details {
+  display: flex;
+  align-items: start;
+  gap: 8px;
 }
 
 .hidden {
