@@ -49,9 +49,9 @@
                     <label class="dropdown-label" for="wet-portions">Choose box amount:</label>
                     <select name="wet-portions" id="wet-portions-dropdown" class="portions-dropdown">
                       <option value="1">1</option>
-                      <option value="1/2">1/2</option>
-                      <option value="1/3">1/3</option>
-                      <option value="1/4">1/4</option>
+                      <option value="0.5">1/2</option>
+                      <option value="0.33">1/3</option>
+                      <option value="0.25">1/4</option>
                     </select>
                 </div>
             </div>
@@ -82,7 +82,13 @@
         </section>
 
         <section class="delete-button-section">
-            <button id="delete-button" class="hidden">Delete</button>
+            <div class="delete-button-container">
+                <button id="delete-button" class="delete-btn hidden">Delete selected meals</button>
+            </div>
+        </section>
+
+        <section class="clear-data-section">
+            <button id="clear-data-button" class="clear-data-btn">Clear all data</button>
         </section>
     </main>
 </body>

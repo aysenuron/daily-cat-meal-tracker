@@ -25,7 +25,7 @@ body {
 }
 
 .input-section {
-  margin: 64px 0;
+  margin: 48px 0;
 }
 
 .meal-type-container {
@@ -135,6 +135,45 @@ body {
   display: flex;
   align-items: start;
   gap: 8px;
+}
+
+.delete-button-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#delete-button {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  font-family: Poppins;
+  font-size: 16px;
+  padding: 6px 20px;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#clear-data-button {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  font-family: Poppins;
+  font-size: 12px;
+  padding: 6px 20px;
+  border-color: #d8d8d8;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 12px;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
 }
 
 .hidden {

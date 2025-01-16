@@ -13,18 +13,20 @@ const totalDryFood = document.getElementById("total-dry-food");
 const totalWetFood = document.getElementById("total-wet-food");
 
 const deleteBtn = document.getElementById("delete-button");
+const clearDataBtn = document.getElementById("clear-data-button");
 
 let isChecked = false;
 
-
+let loggedMeals = JSON.parse(localStorage.getItem("loggedMeals")) || [];
 let loggedDryFood = parseFloat(localStorage.getItem("dryFoodValue")) || 0;
 let loggedWetFood = parseFloat(localStorage.getItem("wetFoodValue")) || 0;
 
+// Set initial values on page load
 totalDryFood.textContent = loggedDryFood;
 totalWetFood.textContent = loggedWetFood;
 
 function togglePortions() {
-    if (dryFoodInput.checked) {
+    if (dryFoodInput.checked) { 
         dryFoodPortions.classList.remove("hidden");
         wetFoodPortions.classList.add("hidden");
     } else if (wetFoodInput.checked){
@@ -35,6 +37,38 @@ function togglePortions() {
 
 dryFoodInput.addEventListener("change", togglePortions);
 wetFoodInput.addEventListener("change", togglePortions);
+
+// Render previously entered meals on page load
+function renderLoggedMeals() {
+    for ( const meal of loggedMeals) {
+        const loggedMeal = document.createElement("li");
+        loggedMeal.classList.add("logged-meal");
+
+        const mealDetails = document.createElement("div");
+        mealDetails.classList.add("meal-details");
+        loggedMealsList.appendChild(mealDetails);
+
+        const checkBox = document.createElement("input");
+        checkBox.setAttribute("type", "checkbox");
+        checkBox.classList.add("meal-checkbox");
+
+        if (meal.type === "dry") {
+            loggedMeal.innerHTML = `${meal.timestamp}
+            <br>${meal.portions} portions of dry food`;
+            loggedMeal.setAttribute("data-dry-food", meal.portions);
+        } else if (meal.type === "wet") {
+            loggedMeal.innerHTML = `${meal.timestamp}
+            <br>${meal.portions} box of wet food`;
+            loggedMeal.setAttribute("data-wet-food", meal.portions);
+        }
+
+        mealDetails.appendChild(checkBox);
+        mealDetails.appendChild(loggedMeal);
+    }
+}
+
+renderLoggedMeals();
+
 
 function renderMeal() {
     const now = new Date();
@@ -56,18 +90,39 @@ function renderMeal() {
     const dryValue = parseFloat(dryPortions.value);
     const wetValue = parseFloat(wetPortions.value);
 
+    let meal = {};
+
     if (dryFoodInput.checked) {
         loggedMeal.innerHTML = `${timestamp}
         <br>${dryValue} portions of dry food`;
         loggedMeal.setAttribute("data-dry-food", dryValue);
         loggedDryFood += dryValue;
         totalDryFood.textContent = loggedDryFood;
+
+        meal = {
+            timestamp,
+            type: "dry",
+            portions: dryValue
+         };
+
+         loggedMeals.push(meal);
+        localStorage.setItem("loggedMeals", JSON.stringify(loggedMeals));
+
     } else if (wetFoodInput.checked){
         loggedMeal.innerHTML = `${timestamp}
         <br>${wetValue} box of wet food`;
         loggedMeal.setAttribute("data-wet-food", wetValue);
         loggedWetFood += wetValue;
-        totalWetFood.textContent = loggedWetFood;
+        totalWetFood.textContent = loggedWetFood.toFixed(2);
+
+        meal = {
+            timestamp,
+            type: "wet",
+            portions: wetValue
+         };
+
+        loggedMeals.push(meal);
+        localStorage.setItem("loggedMeals", JSON.stringify(loggedMeals));
     }
 
     mealDetails.appendChild(checkBox);
@@ -75,7 +130,7 @@ function renderMeal() {
 
     localStorage.setItem("dryFoodValue", loggedDryFood);
     localStorage.setItem("wetFoodValue", loggedWetFood);
-
+    
 }
 
 function renderDeleteBtn() {
@@ -102,8 +157,12 @@ function deleteMeal() {
 
     totalDryFood.textContent = loggedDryFood;
     totalWetFood.textContent = loggedWetFood;
+
+    const timestamp = loggedMeal.innerHTML.split("<br>")[0].trim();
+    loggedMeals = loggedMeals.filter((meal) => meal.timestamp !== timestamp);
     });
 
+    localStorage.setItem("loggedMeals", JSON.stringify(loggedMeals));
     localStorage.setItem("dryFoodValue", loggedDryFood);
     localStorage.setItem("wetFoodValue", loggedWetFood);
     deleteBtn.classList.add("hidden");
@@ -118,3 +177,36 @@ loggedMealsList.addEventListener("change", (event) => {
 })
 
 deleteBtn.addEventListener("click", deleteMeal)
+
+clearDataBtn.addEventListener("click", () => {
+    localStorage.clear();
+    location.reload();
+})
+
+
+// Check if the date in localStorage matches today's date
+function checkAndResetStorage() {
+    const today = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
+    const storedDate = localStorage.getItem("loggedDate");
+
+    if (storedDate !== today) {
+        // Clear meal data
+        localStorage.removeItem("loggedMeals");
+        localStorage.removeItem("dryFoodValue");
+        localStorage.removeItem("wetFoodValue");
+
+        // Reset totals
+        loggedMeals = [];
+        loggedDryFood = 0;
+        loggedWetFood = 0;
+
+        totalDryFood.textContent = loggedDryFood;
+        totalWetFood.textContent = loggedWetFood;
+
+        // Update the date in localStorage
+        localStorage.setItem("loggedDate", today);
+    }
+}
+
+// Call the function when the page loads
+checkAndResetStorage();
