@@ -1,3 +1,5 @@
+const header = document.getElementById("logo");
+
 const dryFoodInput = document.getElementById("dry-food-input");
 const wetFoodInput = document.getElementById("wet-food-input");
 const dryFoodPortions = document.getElementById("dry-food-portions");
@@ -180,6 +182,10 @@ deleteBtn.addEventListener("click", deleteMeal)
 
 clearDataBtn.addEventListener("click", () => {
     localStorage.clear();
+    location.reload();
+})
+
+header.addEventListener("click", () => {
     location.reload();
 })
 
