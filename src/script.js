@@ -197,9 +197,7 @@ function checkAndResetStorage() {
 
     if (storedDate !== today) {
         // Clear meal data
-        localStorage.removeItem("loggedMeals");
-        localStorage.removeItem("dryFoodValue");
-        localStorage.removeItem("wetFoodValue");
+        localStorage.clear();
 
         // Reset totals
         loggedMeals = [];
