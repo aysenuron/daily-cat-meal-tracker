@@ -209,6 +209,9 @@ function checkAndResetStorage() {
 
         // Update the date in localStorage
         localStorage.setItem("loggedDate", today);
+
+        location.reload();
+
     }
 }
 
